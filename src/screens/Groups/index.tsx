@@ -1,15 +1,16 @@
 import { Header } from '@components/Header';
 import { Highlight } from '@components/Highlight';
 import { GroupCard } from '@components/GroupCard';
-import * as S from './styles';
+import { Container } from './styles';
 import { useState } from 'react';
 import { FlatList } from 'react-native';
+import { ListEmpty } from '@components/ListEmpty';
 
 export function Groups() {
   const [groups, setGroups] = useState(['Galera da Rocket', 'Amigos']);
 
   return (
-    <S.Container>
+    <Container>
       <Header />
 
       <Highlight title='Turmas' subTitle='Jogue com a sua turma' />
@@ -22,8 +23,10 @@ export function Groups() {
             title={item}
           />
         )}
+        contentContainerStyle={groups.length === 0 && { flex: 1 }}
+        ListEmptyComponent={() => <ListEmpty message='Que tal cadastrar a primeira turma?' />}
       />
       
-    </S.Container>
+    </Container>
   );
 }
